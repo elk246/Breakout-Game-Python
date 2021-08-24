@@ -1,13 +1,18 @@
 import pygame
-import gameboard
 
 
-oragne = {255, 140, 0}
+def corr(number, game_size):
+    number = number * game_size
+    return number
 
 
-def draw_element(column, row):
-    pygame.draw.rect(gameboard.fenster, oragne, (column * gameboard.MULTIPLIKATOR, row * gameboard.MULTIPLIKATOR, gameboard.MULTIPLIKATOR, gameboard.MULTIPLIKATOR))
-
-
-def test():
-    print(gb.MULTIPLIKATOR)
+def draw_element(column, row, game_size, window, color):
+    pygame.draw.rect(
+        window,
+        color,
+        [corr(column, game_size) + 1,
+         corr(row, game_size) + 1,
+         corr(1, game_size) - 1,
+         corr(1, game_size) - 1
+         ]
+    )
