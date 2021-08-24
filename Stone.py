@@ -1,5 +1,7 @@
 import pygame
 
+colors = [(255, 140, 0), (139, 0, 139), (255, 0, 0), (0, 100, 0), (0, 0, 255)]
+
 
 def corr(number, game_size):
     number = number * game_size

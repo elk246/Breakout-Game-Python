@@ -2,11 +2,11 @@
 import pygame, sys, time, random
 from pygame.locals import *
 import Stone
+from random import randrange
+import map
 
 # defines the size for the game.
-import stoneColors
-
-game_size = 30
+game_size = 20
 
 # generates game display.
 window = pygame.display.set_mode((20 * game_size, 30 * game_size))
@@ -17,16 +17,12 @@ active = True
 # Display refresh
 clock = pygame.time.Clock()
 
-Stone.draw_element(0, 0, game_size, window, stoneColors.green)
-Stone.draw_element(0, 1, game_size, window, stoneColors.red)
-Stone.draw_element(0, 2, game_size, window, stoneColors.black)
-Stone.draw_element(1, 0, game_size, window, stoneColors.green)
-Stone.draw_element(1, 1, game_size, window, stoneColors.red)
-Stone.draw_element(1, 2, game_size, window, stoneColors.orange)
-Stone.draw_element(2, 0, game_size, window, stoneColors.red)
-Stone.draw_element(2, 1, game_size, window, stoneColors.green)
-Stone.draw_element(2, 2, game_size, window, stoneColors.black)
-
+color = (0, 0, 0)
+for x in range(0, 20):
+    for y in range(0, 27):
+        if map.map[y][x] != 0:
+            color = Stone.colors[randrange(0, 4)]
+            Stone.draw_element(x, y, game_size, window, color)
 
 # main loop
 while active:
