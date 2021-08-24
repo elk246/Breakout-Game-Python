@@ -16,10 +16,10 @@ window = pygame.display.set_mode((20 * game_size, 30 * game_size))
 window.fill((255, 255, 255))
 pygame.display.set_caption("Breakout")
 
-# Display refresh
+# Display refresh.
 clock = pygame.time.Clock()
 
-# prints gamefield
+# prints game field.
 for x in range(0, 20):
     for y in range(0, 27):
         if map.game_map[y][x] != 0:
@@ -40,6 +40,7 @@ while active:
 
     # Checks if ball hit a wall.
     Logic.check_wall()
+    Logic.check_stone(window, game_size)
 
     # Checks if next_step is true. Starts Next ball step
     if next_step:
@@ -47,11 +48,12 @@ while active:
         next_step = False
 
     Elements.draw_ball(Elements.ball_x, Elements.ball_y, window, game_size)
+    print("Ballposition X=", Elements.ball_x, " / Y = ", Elements.ball_y)
 
     # Update window
     pygame.display.flip()
 
     # Refresh time
-    clock.tick(5)
+    clock.tick(3)
 
 pygame.quit()

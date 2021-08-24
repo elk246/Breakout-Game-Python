@@ -1,10 +1,10 @@
 import pygame
 
 # defines ball coordinates and directions.
-ball_x = 10
+ball_x = 17
 ball_y = 23
-ball_x_direction = 1
-ball_y_direction = 1
+ball_x_direction = -1
+ball_y_direction = -1
 
 # defines the colors for the stones.
 colors = [(255, 140, 0), (139, 0, 139), (255, 0, 0), (0, 100, 0), (0, 0, 255), (255, 0, 0)]
@@ -50,7 +50,7 @@ def draw_ball(x, y, window, game_size):
 
 
 # deletes old ball and replace that field with a white background element,
-def delete_ball(x, y, window, game_size):
+def delete_element(x, y, window, game_size):
     pygame.draw.rect(
         window,
         white,
