@@ -33,9 +33,8 @@ while active:
             active = False
             print("Player left the game!")
 
-        # checks if user press space and sets next_step to true.
         if event.type == pygame.KEYDOWN:
-            next_step = True
+
             if event.key == pygame.K_LEFT:
                 Elements.figure_direction = -1
             elif event.key == pygame.K_RIGHT:
@@ -48,15 +47,13 @@ while active:
     Logic.check_stone(window, game_size)
 
     # Checks if next_step is true. Starts Next ball step
-    if next_step:
-        Logic.move_ball(window, game_size)
-        next_step = False
+
+    Logic.move_ball(window, game_size)
 
     # Update window
     pygame.display.flip()
 
     # Refresh time
-    clock = pygame.time.Clock()
-    pygame.key.set_repeat(100, 0)
+    clock.tick(2)
 
 pygame.quit()

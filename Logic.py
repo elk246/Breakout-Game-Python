@@ -60,10 +60,7 @@ def count_stones():
 
 
 def move_figure(window, game_size):
-
     Elements.delete_figure(Elements.figure_x, window, game_size)
     Elements.figure_x += Elements.figure_direction
-
     Elements.draw_figure(Elements.figure_x, window, game_size)
     Elements.figure_direction = 0
-
