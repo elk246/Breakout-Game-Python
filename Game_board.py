@@ -3,7 +3,8 @@ import pygame
 import Elements
 from random import randrange
 import Logic
-import map
+import Moves
+import Map
 
 # defines values for the game.
 game_size = 20
@@ -22,10 +23,10 @@ clock = pygame.time.Clock()
 # prints game field.
 for x in range(0, 20):
     for y in range(0, 27):
-        if map.game_map[y][x] != 0:
+        if Map.game_map[y][x] != 0:
             color = Elements.colors[randrange(0, 5)]
             Elements.draw_stone(x, y, game_size, window, color)
-# main loop
+# main loop.
 while active:
     # Checks if the user exit game.
     for event in pygame.event.get():
@@ -33,27 +34,25 @@ while active:
             active = False
             print("Player left the game!")
 
+        # User input.
         if event.type == pygame.KEYDOWN:
-
             if event.key == pygame.K_LEFT:
                 Elements.figure_direction = -1
             elif event.key == pygame.K_RIGHT:
                 Elements.figure_direction = 1
-
-                # Checks if ball hit a wall.
-    print(Logic.count_stones())
+    # Game logic.
+    Logic.check_player_wall()
     Logic.check_wall()
-    Logic.move_figure(window, game_size)
     Logic.check_stone(window, game_size)
 
-    # Checks if next_step is true. Starts Next ball step
+    # Moves.
+    Moves.move_ball(window, game_size)
+    Moves.move_figure(window, game_size)
 
-    Logic.move_ball(window, game_size)
-
-    # Update window
+    # Update window.
     pygame.display.flip()
 
-    # Refresh time
+    # Refresh time.
     clock.tick(2)
 
 pygame.quit()
