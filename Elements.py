@@ -1,10 +1,16 @@
 import pygame
 
 # defines ball coordinates and directions.
+import map
+
 ball_x = 17
 ball_y = 23
 ball_x_direction = -1
 ball_y_direction = -1
+
+figure_x = 10
+figure_y = 27
+figure_direction = 0
 
 # defines the colors for the stones.
 colors = [(255, 140, 0), (139, 0, 139), (255, 0, 0), (0, 100, 0), (0, 0, 255), (255, 0, 0)]
@@ -59,3 +65,11 @@ def delete_element(x, y, window, game_size):
          corr(1, game_size),
          corr(1, game_size)]
     )
+
+
+def draw_figure(x, window, game_size):
+    pygame.draw.rect(window, black, (corr(x, game_size), corr(figure_y, game_size), 50, corr(1, game_size)))
+
+
+def delete_figure(x, window, game_size):
+    pygame.draw.rect(window, white, (corr(x, game_size), corr(figure_y, game_size), 50, corr(1, game_size)))

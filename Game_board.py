@@ -34,26 +34,29 @@ while active:
             print("Player left the game!")
 
         # checks if user press space and sets next_step to true.
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+        if event.type == pygame.KEYDOWN:
             next_step = True
-            print("Next Step")
+            if event.key == pygame.K_LEFT:
+                Elements.figure_direction = -1
+            elif event.key == pygame.K_RIGHT:
+                Elements.figure_direction = 1
 
-    # Checks if ball hit a wall.
+                # Checks if ball hit a wall.
+    print(Logic.count_stones())
     Logic.check_wall()
+    Logic.move_figure(window, game_size)
     Logic.check_stone(window, game_size)
 
     # Checks if next_step is true. Starts Next ball step
     if next_step:
-        Logic.next_step(window, game_size)
+        Logic.move_ball(window, game_size)
         next_step = False
-
-    Elements.draw_ball(Elements.ball_x, Elements.ball_y, window, game_size)
-    print("Ballposition X=", Elements.ball_x, " / Y = ", Elements.ball_y)
 
     # Update window
     pygame.display.flip()
 
     # Refresh time
-    clock.tick(3)
+    clock = pygame.time.Clock()
+    pygame.key.set_repeat(100, 0)
 
 pygame.quit()
