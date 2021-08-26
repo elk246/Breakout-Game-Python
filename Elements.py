@@ -1,6 +1,5 @@
 import pygame
 
-# defines ball coordinates and directions.
 ball_x = 17
 ball_y = 23
 ball_x_direction = -1
@@ -19,6 +18,9 @@ black = (0, 0, 0)
 
 # defines color for the background.
 white = (255, 255, 255)
+
+# defines score to display it.
+score = 0
 
 
 # corrects the distance between the stones for the current game_size.

@@ -1,5 +1,9 @@
+import pygame
+
 import Elements
 import Map
+
+score = 0
 
 
 # checks wall for the ball.
@@ -13,7 +17,7 @@ def check_wall():
     if Elements.ball_y >= 29:
         Elements.ball_y_direction = 0
         Elements.ball_x_direction = 0
-        print("Verloren :(")
+        pygame.mixer.music.stop()
 
 
 # checks if ball hit a stone.
@@ -23,6 +27,7 @@ def check_stone(window, game_size):
             Elements.delete_element(Elements.ball_x, Elements.ball_y - 1, window, game_size)
             Map.game_map[Elements.ball_y - 1][Elements.ball_x] = 0
             Elements.ball_y_direction = 1
+            Elements.score += 50
         else:
             if Elements.ball_x_direction == 1:
                 if Map.game_map[Elements.ball_y - 1][Elements.ball_x + 1] != 0:
@@ -30,12 +35,14 @@ def check_stone(window, game_size):
                     Map.game_map[Elements.ball_y - 1][Elements.ball_x + 1] = 0
                     Elements.ball_y_direction = 1
                     Elements.ball_x_direction = -1
+                    Elements.score += 50
             else:
                 if Map.game_map[Elements.ball_y - 1][Elements.ball_x - 1] != 0:
                     Elements.delete_element(Elements.ball_x - 1, Elements.ball_y - 1, window, game_size)
                     Map.game_map[Elements.ball_y - 1][Elements.ball_x - 1] = 0
                     Elements.ball_y_direction = 1
                     Elements.ball_x_direction = + 1
+                    Elements.score += 50
 
 
 # counts stones and check if the player won the game.
@@ -46,7 +53,7 @@ def count_stones():
             if Map.game_map[i][j] == 1:
                 stones += 1
     if stones > 0:
-        return stones, "Stones left"
+        return "Stones: " + str(stones)
     else:
         Elements.ball_x_direction = 0
         Elements.ball_y_direction = 0
@@ -58,15 +65,16 @@ def check_player_wall():
     if Elements.figure_x == 0 and Elements.figure_direction == -1:
         Elements.figure_direction = 0
 
-    if Elements.figure_x == 18 and Elements.figure_direction == 1:
+    if Elements.figure_x == 16 and Elements.figure_direction == 1:
         Elements.figure_direction = 0
 
 
+# checks if ball hit the player figure.
 def check_hit_player_figure():
     if Elements.ball_y == 26 and Elements.ball_y_direction == 1:
         if Elements.ball_x_direction == -1:
-            if Elements.figure_x <= Elements.ball_x  <= Elements.figure_x + 3:
+            if Elements.figure_x <= Elements.ball_x <= Elements.figure_x + 3:
                 Elements.ball_y_direction = -1
         if Elements.ball_x_direction == 1:
-            if Elements.figure_x <= Elements.ball_x  <= Elements.figure_x + 3:
+            if Elements.figure_x <= Elements.ball_x <= Elements.figure_x + 3:
                 Elements.ball_y_direction = -1
