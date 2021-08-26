@@ -65,8 +65,8 @@ def check_player_wall():
 def check_hit_player_figure():
     if Elements.ball_y == 26 and Elements.ball_y_direction == 1:
         if Elements.ball_x_direction == -1:
-            if Elements.figure_x <= Elements.ball_x - 1 <= Elements.figure_x + 3:
+            if Elements.figure_x <= Elements.ball_x  <= Elements.figure_x + 3:
                 Elements.ball_y_direction = -1
         if Elements.ball_x_direction == 1:
-            if Elements.figure_x <= Elements.ball_x + 1 <= Elements.figure_x + 3:
+            if Elements.figure_x <= Elements.ball_x  <= Elements.figure_x + 3:
                 Elements.ball_y_direction = -1

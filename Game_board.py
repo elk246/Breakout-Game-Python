@@ -1,10 +1,18 @@
 # import classes and libraries.
 import pygame
+
 import Elements
 from random import randrange
 import Logic
 import Moves
 import Map
+
+pygame.init()
+
+# Musik/Soundeffekte einrichten
+pygame.mixer.music.load('target/Loyalty_Freak_Music_-_10_-_Everyone_is_so_alive.ogg')
+pygame.mixer.music.play(-1,0.0)
+
 
 # defines values for the game.
 game_size = 20
@@ -38,10 +46,8 @@ while active:
         # User input.
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
-                print("Spieler hat Pfeiltaste links gedrückt")
                 Elements.figure_direction = -1
             elif event.key == pygame.K_RIGHT:
-                print("Spieler hat Pfeiltaste rechts gedrückt")
                 Elements.figure_direction = 1
     # Game logic.
     Logic.check_player_wall()
@@ -52,6 +58,7 @@ while active:
     # Moves.
     Moves.move_ball(window, game_size)
     Moves.move_figure(window, game_size)
+    print(Logic.count_stones())
 
     # Updates window.
     pygame.display.flip()

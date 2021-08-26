@@ -68,9 +68,9 @@ def delete_element(x, y, window, game_size):
 
 # draws the figure.
 def draw_figure(x, window, game_size):
-    pygame.draw.rect(window, black, (corr(x, game_size), corr(figure_y, game_size), 50, corr(1, game_size)))
+    pygame.draw.rect(window, black, (corr(x, game_size), corr(figure_y, game_size), 80, corr(1, game_size)))
 
 
 # deletes the figure.
 def delete_figure(x, window, game_size):
-    pygame.draw.rect(window, white, (corr(x, game_size), corr(figure_y, game_size), 50, corr(1, game_size)))
+    pygame.draw.rect(window, white, (corr(x, game_size), corr(figure_y, game_size), 80, corr(1, game_size)))
