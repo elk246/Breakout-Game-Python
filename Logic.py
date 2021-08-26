@@ -1,6 +1,4 @@
 import Elements
-
-# checks if the ball hit a wall.
 import Map
 
 
@@ -13,7 +11,9 @@ def check_wall():
     if Elements.ball_y <= 0:
         Elements.ball_y_direction = 1
     if Elements.ball_y >= 29:
-        Elements.ball_y_direction = -1
+        Elements.ball_y_direction = 0
+        Elements.ball_x_direction = 0
+        print("Verloren :(")
 
 
 # checks if ball hit a stone.
