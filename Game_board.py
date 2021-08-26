@@ -47,30 +47,16 @@ while active:
     Logic.check_player_wall()
     Logic.check_wall()
     Logic.check_stone(window, game_size)
-    if Elements.ball_y == 27 and Elements.ball_y_direction == 1:
-        print("Kontrolle auf Kollsion mit Schläger")
-
-        if Elements.ball_x_direction == -1:
-            print("Ball kommt von rechts")
-            if Elements.figure_x <= Elements.ball_x - 1 <= Elements.figure_x + 3:
-                print("Ball trifft Schläger")
-                Elements.ball_y_direction = -1
-
-        if Elements.ball_x_direction == 1:
-            print("Ball kommt von links")
-            if Elements.figure_x <= Elements.ball_x + 1 <= Elements.figure_x + 3:
-                print("Ball trifft Schläger")
-                Elements.ball_y_direction= -1
-
+    Logic.check_hit_player_figure()
 
     # Moves.
     Moves.move_ball(window, game_size)
     Moves.move_figure(window, game_size)
 
-    # Fenster aktualisieren
+    # Updates window.
     pygame.display.flip()
 
-    # Refresh-Zeiten festlegen
+    # Refresh time.
     clock.tick(9)
 
 pygame.quit()
