@@ -11,6 +11,8 @@ pygame.init()
 # defines game over status.
 game_over = False
 
+score_counter_for_lives = 0
+
 # Sound effects.
 effect = pygame.mixer.Sound('target/stone_hit.ogg')
 lose_sound = pygame.mixer.Sound('target/lose.ogg')
@@ -39,6 +41,7 @@ def check_wall(window, game_size):
 
 # checks if ball hit a stone.
 def check_stone(window, game_size):
+    global score_counter_for_lives
     if Elements.ball_y_direction == -1:
         if Map.game_map[Elements.ball_y - 1][Elements.ball_x] != 0:
             Elements.delete_element(Elements.ball_x, Elements.ball_y - 1, window, game_size)
@@ -46,6 +49,7 @@ def check_stone(window, game_size):
             Elements.ball_y_direction = 1
             effect.play()
             User_interface.score += 50
+            score_counter_for_lives += 50
         else:
             if Elements.ball_x_direction == 1:
                 if Map.game_map[Elements.ball_y - 1][Elements.ball_x + 1] != 0:
@@ -55,6 +59,7 @@ def check_stone(window, game_size):
                     Elements.ball_x_direction = -1
                     effect.play()
                     User_interface.score += 50
+                    score_counter_for_lives += 50
             else:
                 if Map.game_map[Elements.ball_y - 1][Elements.ball_x - 1] != 0:
                     Elements.delete_element(Elements.ball_x - 1, Elements.ball_y - 1, window, game_size)
@@ -63,6 +68,7 @@ def check_stone(window, game_size):
                     Elements.ball_x_direction = + 1
                     effect.play()
                     User_interface.score += 50
+                    score_counter_for_lives += 50
 
 
 # counts stones and check if the player won the game.
@@ -116,3 +122,10 @@ def respawn_ball(window, game_size):
     Elements.ball_y = 20
     Elements.ball_x_direction = 1
     Elements.ball_y_direction = 1
+
+
+def check_new_lives():
+    global score_counter_for_lives
+    if score_counter_for_lives == 100:
+        User_interface.lives += 1
+        score_counter_for_lives = 0

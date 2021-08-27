@@ -53,6 +53,7 @@ while active:
                 Elements.figure_direction = 1
 
     # Game logic.
+    Logic.check_new_lives()
     Logic.check_player_wall()
     Logic.check_wall(window, game_size)
     Logic.check_stone(window, game_size)
