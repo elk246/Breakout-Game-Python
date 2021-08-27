@@ -7,7 +7,7 @@ import User_interface
 pygame.init()
 
 # Hit sound
-effect = pygame.mixer.Sound('target/hit.ogg')
+effect = pygame.mixer.Sound('target/stone_hit.ogg')
 
 
 def check_wall():
