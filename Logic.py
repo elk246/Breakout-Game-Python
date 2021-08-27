@@ -1,3 +1,5 @@
+import time
+
 import pygame
 
 import Elements
@@ -6,11 +8,13 @@ import User_interface
 
 pygame.init()
 
+game_over = False
 # Hit sound
 effect = pygame.mixer.Sound('target/stone_hit.ogg')
 
 
 def check_wall():
+    global game_over
     if Elements.ball_x <= 0:
         Elements.ball_x_direction = 1
     if Elements.ball_x >= 19:
@@ -21,6 +25,7 @@ def check_wall():
         Elements.ball_y_direction = 0
         Elements.ball_x_direction = 0
         pygame.mixer.music.stop()
+        game_over = True
 
 
 # checks if ball hit a stone.
@@ -84,3 +89,12 @@ def check_hit_player_figure():
         if Elements.ball_x_direction == 1:
             if Elements.figure_x <= Elements.ball_x <= Elements.figure_x + 3:
                 Elements.ball_y_direction = -1
+
+
+# starts game over sound and exits the game.
+def start_game_over_sound():
+    game_over_sound_length = pygame.mixer.Sound('target/game_over.ogg').get_length()
+    pygame.mixer.Sound('target/game_over.ogg').play()
+    time.sleep(game_over_sound_length)
+    pygame.quit()
+    exit()

@@ -67,5 +67,6 @@ while active:
     # Refresh time.
     clock.tick(9)
 
-pygame.quit()
-exit()
+    # checks if game over and starts the game over sound.
+    if Logic.game_over:
+        Logic.start_game_over_sound()
