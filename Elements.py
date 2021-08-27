@@ -3,14 +3,15 @@ import pygame
 import Map
 from random import randrange
 
-ball_x = 17
-ball_y = 23
-ball_x_direction = -1
-ball_y_direction = -1
+# defines ball coordinates and directions.
+ball_x = 1
+ball_y = 20
+ball_x_direction = 1
+ball_y_direction = 1
 
 # defines figure coordinates and direction.
-figure_x = 10
-figure_y = 27
+figure_x = 8
+figure_y = 29
 figure_direction = 0
 
 # defines the colors for the stones.

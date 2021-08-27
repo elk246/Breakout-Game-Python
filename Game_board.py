@@ -15,7 +15,7 @@ color = (0, 0, 0)
 active = True
 
 # generates game display.
-window = pygame.display.set_mode((20 * game_size, 30 * game_size))
+window = pygame.display.set_mode((20 * game_size, 31 * game_size))
 window.fill((255, 255, 255))
 pygame.display.set_caption("Breakout")
 
@@ -36,6 +36,7 @@ while active:
     # prints interface elements.
     User_interface.display_score(window)
     User_interface.display_remaining_stones(window)
+    User_interface.display_lives(window)
 
     # checks if the user exit game.
     for event in pygame.event.get():
@@ -53,7 +54,7 @@ while active:
 
     # Game logic.
     Logic.check_player_wall()
-    Logic.check_wall()
+    Logic.check_wall(window, game_size)
     Logic.check_stone(window, game_size)
     Logic.check_hit_player_figure()
 

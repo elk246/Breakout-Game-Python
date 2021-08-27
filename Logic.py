@@ -8,12 +8,16 @@ import User_interface
 
 pygame.init()
 
+# defines game over status.
 game_over = False
-# Hit sound
+
+# Sound effects.
 effect = pygame.mixer.Sound('target/stone_hit.ogg')
+lose_sound = pygame.mixer.Sound('target/lose.ogg')
 
 
-def check_wall():
+# checks wall and checks if you lose a live.
+def check_wall(window, game_size):
     global game_over
     if Elements.ball_x <= 0:
         Elements.ball_x_direction = 1
@@ -21,11 +25,16 @@ def check_wall():
         Elements.ball_x_direction = -1
     if Elements.ball_y <= 0:
         Elements.ball_y_direction = 1
-    if Elements.ball_y >= 29:
-        Elements.ball_y_direction = 0
-        Elements.ball_x_direction = 0
-        pygame.mixer.music.stop()
-        game_over = True
+    if Elements.ball_y >= 31:
+        User_interface.lives -= 1
+        if User_interface.lives == 0:
+            Elements.ball_y_direction = 0
+            Elements.ball_x_direction = 0
+            pygame.mixer.music.stop()
+            game_over = True
+        else:
+            lose_sound.play()
+            respawn_ball(window, game_size)
 
 
 # checks if ball hit a stone.
@@ -82,7 +91,7 @@ def check_player_wall():
 
 # checks if ball hit the player figure.
 def check_hit_player_figure():
-    if Elements.ball_y == 26 and Elements.ball_y_direction == 1:
+    if Elements.ball_y == 28 and Elements.ball_y_direction == 1:
         if Elements.ball_x_direction == -1:
             if Elements.figure_x <= Elements.ball_x <= Elements.figure_x + 3:
                 Elements.ball_y_direction = -1
@@ -98,3 +107,12 @@ def start_game_over_sound():
     time.sleep(game_over_sound_length)
     pygame.quit()
     exit()
+
+
+# respawns ball if you lose a live.
+def respawn_ball(window, game_size):
+    Elements.delete_element(Elements.ball_x, Elements.ball_y, window, game_size)
+    Elements.ball_x = 1
+    Elements.ball_y = 20
+    Elements.ball_x_direction = 1
+    Elements.ball_y_direction = 1
