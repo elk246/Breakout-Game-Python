@@ -1,5 +1,8 @@
 import pygame
 
+import Map
+from random import randrange
+
 ball_x = 17
 ball_y = 23
 ball_x_direction = -1
@@ -18,9 +21,6 @@ black = (0, 0, 0)
 
 # defines color for the background.
 white = (255, 255, 255)
-
-# defines score to display it.
-score = 0
 
 
 # corrects the distance between the stones for the current game_size.
@@ -76,3 +76,12 @@ def draw_figure(x, window, game_size):
 # deletes the figure.
 def delete_figure(x, window, game_size):
     pygame.draw.rect(window, white, (corr(x, game_size), corr(figure_y, game_size), 80, corr(1, game_size)))
+
+
+# prints game field.
+def print_field(game_size, window):
+    for x in range(0, 20):
+        for y in range(0, 27):
+            if Map.game_map[y][x] != 0:
+                color = colors[randrange(0, 5)]
+                draw_stone(x, y, game_size, window, color)

@@ -2,11 +2,14 @@ import pygame
 
 import Elements
 import Map
+import User_interface
 
-score = 0
+pygame.init()
+
+# Hit sound
+effect = pygame.mixer.Sound('target/hit.ogg')
 
 
-# checks wall for the ball.
 def check_wall():
     if Elements.ball_x <= 0:
         Elements.ball_x_direction = 1
@@ -27,7 +30,8 @@ def check_stone(window, game_size):
             Elements.delete_element(Elements.ball_x, Elements.ball_y - 1, window, game_size)
             Map.game_map[Elements.ball_y - 1][Elements.ball_x] = 0
             Elements.ball_y_direction = 1
-            Elements.score += 50
+            effect.play()
+            User_interface.score += 50
         else:
             if Elements.ball_x_direction == 1:
                 if Map.game_map[Elements.ball_y - 1][Elements.ball_x + 1] != 0:
@@ -35,14 +39,16 @@ def check_stone(window, game_size):
                     Map.game_map[Elements.ball_y - 1][Elements.ball_x + 1] = 0
                     Elements.ball_y_direction = 1
                     Elements.ball_x_direction = -1
-                    Elements.score += 50
+                    effect.play()
+                    User_interface.score += 50
             else:
                 if Map.game_map[Elements.ball_y - 1][Elements.ball_x - 1] != 0:
                     Elements.delete_element(Elements.ball_x - 1, Elements.ball_y - 1, window, game_size)
                     Map.game_map[Elements.ball_y - 1][Elements.ball_x - 1] = 0
                     Elements.ball_y_direction = 1
                     Elements.ball_x_direction = + 1
-                    Elements.score += 50
+                    effect.play()
+                    User_interface.score += 50
 
 
 # counts stones and check if the player won the game.
