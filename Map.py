@@ -1,5 +1,10 @@
+from random import randrange
+
+cells = []
+game_map = []
+
 # defines the stones in the game field.
-game_map = [
+smiley_map = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
@@ -31,3 +36,17 @@ game_map = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ]
+
+
+def generate_map(index):
+    global game_map
+    if index == 1:
+        game_map = smiley_map
+
+    elif index == 2:
+        game_map = []
+        for j in range(0, 30):
+            for i in range(0, 21):
+                random_binary = randrange(0, 2)
+                cells.append(random_binary)
+            game_map.append(cells)

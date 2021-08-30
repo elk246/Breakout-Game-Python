@@ -1,5 +1,7 @@
 # import classes and libraries.
 import pygame
+
+import Map
 import User_interface
 import Elements
 import Logic
@@ -24,6 +26,7 @@ clock = pygame.time.Clock()
 pygame.key.set_repeat(10, 0)
 
 # prints game field.
+Map.generate_map(1)
 Elements.print_field(game_size, window)
 
 # main loop.
