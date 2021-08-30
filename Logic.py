@@ -1,10 +1,8 @@
-import time
-
 import pygame
-
 import Elements
 import Map
 import User_interface
+import time
 
 pygame.init()
 
@@ -27,7 +25,7 @@ def check_wall(window, game_size):
         Elements.ball_x_direction = -1
     if Elements.ball_y <= 0:
         Elements.ball_y_direction = 1
-    if Elements.ball_y >= 31:
+    if Elements.ball_y >= 30:
         User_interface.lives -= 1
         if User_interface.lives == 0:
             Elements.ball_y_direction = 0
@@ -42,6 +40,7 @@ def check_wall(window, game_size):
 # checks if ball hit a stone.
 def check_stone(window, game_size):
     global score_counter_for_lives
+    # checks stone up
     if Elements.ball_y_direction == -1:
         if Map.game_map[Elements.ball_y - 1][Elements.ball_x] != 0:
             Elements.delete_element(Elements.ball_x, Elements.ball_y - 1, window, game_size)
@@ -51,6 +50,7 @@ def check_stone(window, game_size):
             User_interface.score += 50
             score_counter_for_lives += 50
         else:
+            # checks stone up right.
             if Elements.ball_x_direction == 1:
                 if Map.game_map[Elements.ball_y - 1][Elements.ball_x + 1] != 0:
                     Elements.delete_element(Elements.ball_x + 1, Elements.ball_y - 1, window, game_size)
@@ -61,6 +61,7 @@ def check_stone(window, game_size):
                     User_interface.score += 50
                     score_counter_for_lives += 50
             else:
+                # checks stone up left.
                 if Map.game_map[Elements.ball_y - 1][Elements.ball_x - 1] != 0:
                     Elements.delete_element(Elements.ball_x - 1, Elements.ball_y - 1, window, game_size)
                     Map.game_map[Elements.ball_y - 1][Elements.ball_x - 1] = 0
@@ -69,6 +70,17 @@ def check_stone(window, game_size):
                     effect.play()
                     User_interface.score += 50
                     score_counter_for_lives += 50
+    else:
+        # checks stone down if the ball is up to the the player figure.
+        if Elements.ball_y < Elements.figure_y:
+            if Map.game_map[Elements.ball_y + 1][Elements.ball_x] != 0:
+                Elements.delete_element(Elements.ball_x, Elements.ball_y + 1, window, game_size)
+                Map.game_map[Elements.ball_y + 1][Elements.ball_x] = 0
+                Elements.ball_y_direction = - 1
+                Elements.ball_x_direction = - 1
+                effect.play()
+                User_interface.score += 50
+                score_counter_for_lives += 50
 
 
 # counts stones and check if the player won the game.
@@ -126,6 +138,6 @@ def respawn_ball(window, game_size):
 
 def check_new_lives():
     global score_counter_for_lives
-    if score_counter_for_lives == 100:
+    if score_counter_for_lives == 400:
         User_interface.lives += 1
         score_counter_for_lives = 0

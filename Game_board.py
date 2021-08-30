@@ -67,7 +67,7 @@ while active:
     pygame.display.flip()
 
     # Refresh time.
-    clock.tick(9)
+    clock.tick(10)
 
     # checks if game over and starts the game over sound.
     if Logic.game_over:

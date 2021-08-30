@@ -5,8 +5,8 @@ from random import randrange
 
 # defines ball coordinates and directions.
 ball_x = 1
-ball_y = 20
-ball_x_direction = 1
+ball_y = 19
+ball_x_direction = -1
 ball_y_direction = 1
 
 # defines figure coordinates and direction.
